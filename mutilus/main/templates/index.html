@@ -1,0 +1,185 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="lines-wrap">
+    <div class="lines-inner">
+        <div class="lines"></div>
+    </div>
+</div>
+<!-- END lines -->
+
+<div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+            <span class="icofont-close js-menu-toggle"></span>
+        </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+</div>
+
+<nav class="site-nav">
+    <div class="container">
+        <div class="site-navigation">
+            <a href="{% static 'index.html' %}" class="logo float-left m-0">Style <span class="text-primary">.</span></a>
+            <ul class="js-clone-nav d-none d-lg-inline-noone text-left site-menu">
+                <li class="active"><a href="{% static 'index.html' %}">Home</a></li>
+                <li class="has-children">
+                    <a href="#">Pages</a>
+                    <ul class="dropdown">
+                        <li><a href="{% static 'portfolio.html' %}">Portfolio</a></li>
+                        <li><a href="{% static 'blog.html' %}">Blog</a></li>
+                        <li><a href="{% static 'single.html' %}">Single</a></li>
+                        <li><a href="{% static 'about.html' %}">About</a></li>
+                        <li><a href="{% static 'contact.html' %}">Contact</a></li>
+                        <li class="has-children">
+                            <a href="#">Menu Two</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Sub Menu One</a></li>
+                                <li><a href="#">Sub Menu Two</a></li>
+                                <li><a href="#">Sub Menu Three</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Menu Three</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% static 'portfolio.html' %}">Portfolio</a></li>
+                <li><a href="{% static 'elements.html' %}">Elements</a></li>
+                <li><a href="{% static 'about.html' %}">About</a></li>
+                <li><a href="{% static 'contact.html' %}">Contact Us</a></li>
+            </ul>
+            <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-block"
+                data-toggle="collapse" data-target="#main-navbar">
+                <span></span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="custom-hero">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h1 class="hero-heading">Minimal Style Collection &mdash; 2021</h1>
+                <div class="line js-line mx-auto mb-3 my-3"></div>
+                <p class="sub-text">Far far away, behind the word mountains, far from the countries Vokalia and
+                    Consonantia, there live the blind texts.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row align-items-center justify-content-around">
+            <div class="col-lg-4 text-center">
+                <div>
+                    <div data-jarallax-element="-100" class="jarallax">
+                        <h2>Minimal Design</h2>
+                        <span class="d-inline-block">Minimalist Design</span>
+                        <img src="{% static 'images/img_v_2-min.jpg' %}" alt="Image" class="img-fluid my-3 my-lg-5">
+                        <p class="line-top fig-2-text mb-4">Far far away, behind the word mountains, far from the
+                            countries Vokalia and Consonantia, there live the blind texts.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 mt-5">
+                <div>
+                    <h2>Minimal Watch</h2>
+                    <span class="d-inline-block">Innovative Design</span>
+                    <div class="line me-auto mb-3 mt-3"></div>
+                    <p class="line-top fig-2-text my-4">Far far away, behind the word mountains, far from the countries
+                        Vokalia and Consonantia, there live the blind texts.</p>
+                    <img src="{% static 'images/img_v_1-min.jpg' %}" alt="Image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 mb-lg-0 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-2 d-flex align-items-md-center">
+                    <div class="image">
+                        <img src="{% static 'images/img_v_4-min.jpg' %}" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="text">
+                        <h2>Sneakers</h2>
+                        <p>Far far away, behind the word mountains, far from the countries.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional cards in similar format -->
+        </div>
+    </div>
+</div>
+
+<div class="section-4">
+    <div class="container">
+        <div class="row mb-4 align-items-center">
+            <div class="col-6">
+                <h2 class="line-top">Featured Collections</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a href="#" class="custom-prev-v2 js-custom-prev-v2">Prev</a>
+                <span class="mx-3">/</span>
+                <a href="#" class="custom-next-v2 js-custom-next-v2">Next</a>
+            </div>
+        </div>
+
+        <div>
+            <div class="owl-4-slider owl-carousel">
+                <div class="product">
+                    <a href="#" class="d-block">
+                        <img src="{% static 'images/img_v_8-min.jpg' %}" alt="Image" class="img-fluid">
+                    </a>
+                    <div class="text-center text-md-left">
+                        <h3>Woman Floral Dress</h3>
+                        <p>Far far away, behind the word mountains, far from the countries.</p>
+                    </div>
+                </div>
+                <!-- Additional products in similar format -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-4">
+                <h2>Don't miss the new season 2021 lookbook</h2>
+                <div class="line my-3"></div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="0">
+                <div class="feature-v3 d-block">
+                    <div class="wrap-icon">
+                        <i class="flaticon-chat-comment-oval-speech-bubble-with-text-lines"></i>
+                    </div>
+                    <div class="text">
+                        <h3>Minimal Design</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts...</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional features in similar format -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
