@@ -23,7 +23,7 @@
 
                     {% for x in buoys %}
                         <div class="col-4 text-center">
-                            <h2>Study the Buoys</h2>
+                            <h2>{% x.name%}</h2>
                             <span class="d-inline-block">Learn the Buoys</span>
                             <a href="{% static 'images/img_v_2-min.jpg' %}" class="gal-item" data-fancybox="gal">
                                 <img src="{% static 'images/img_v_2-min.jpg' %}" alt="Image" class="img-fluid">
