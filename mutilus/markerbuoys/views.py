@@ -1,12 +1,12 @@
 from django.http import HttpResponse
 from django.template import loader
 
-from markerbuoys import MarkerBuoy
+from mutilus_classes import marker_buoy
 
 def main(request):
     template = loader.get_template('markerbuoys.html')
 
-    buoy_cm_east = MarkerBuoy("Cardinal Mark East")
+    buoy_cm_east = marker_buoy.MarkerBuoy("Cardinal Mark East")
 
     context = {
         'buoys' : [buoy_cm_east]
