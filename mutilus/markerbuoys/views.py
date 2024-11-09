@@ -3,4 +3,9 @@ from django.template import loader
 
 def main(request):
     template = loader.get_template('markerbuoys.html')
-    return HttpResponse(template.render())
+
+    context = {
+        'buoys' : ['north', 'east', 'south', 'west']
+    }
+
+    return HttpResponse(template.render(context, request))
