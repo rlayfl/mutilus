@@ -19,7 +19,7 @@
         <div class="col-lg-12">
 
             <!-- Form Start -->
-            <form onsubmit="return false">
+            <form id="beginForm" onsubmit="return validateBeginForm()">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -34,19 +34,22 @@
                         </div>
                     </div>
                 </div>
-            <button type="submit" id="submitButtom" class="btn btn-primary">Submit</button>
-        </form>
+                <button type="submit" id="submitButtom" class="btn btn-primary">Submit</button>
+                <ul if="formErrorList">
+                    <li>Test</li>
+                </ul>
+            </form>
+        </div>
     </div>
-</div>
 </div>
 
 <script>
 
-    $("p").click(function () {
-        alert("The paragraph was clicked.");
+    $('#submitButtom').click(function () {
+        alert("The form was submitted.");
     });
 
 </script>
 
-
+<script src="{% static 'js/mutilus/begin.js' %}"></script>
 {% endblock %}
