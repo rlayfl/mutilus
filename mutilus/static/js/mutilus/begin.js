@@ -8,12 +8,12 @@ function validateBeginForm() {
     var password = $('#password').val();
 
     if (uid.length < 1) {
-        $('#formErrorList').append('<li>Please include a .pickle file</li>')
+        $('#formErrorList').append('<li>Please choose a unique identifier</li>')
         isValidated = false
     }
 
     if (password.length < 1) {
-        $('#formErrorList').append('<li>Please include a .pickle file</li>')
+        $('#formErrorList').append('<li>Please choose a password</li>')
         isValidated = false
     }
 
