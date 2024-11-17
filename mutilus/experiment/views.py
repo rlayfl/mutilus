@@ -31,7 +31,7 @@ def begin(request, experimentNumber):
     # Render the template with context
     return HttpResponse(template.render(context, request))
 
-def upload_experiment_data_to_firebase():
+def upload_experiment_data_to_firebase(jsonObjectForUpload):
 
     URL = 'https://mutilus-7d3b1-default-rtdb.europe-west1.firebasedatabase.app/Experiments/.json?auth=AIzaSyAQt-LmICWeHMo8tNGDgvh8a0_2OS-nnP0'
 
