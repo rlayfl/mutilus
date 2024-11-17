@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.template import loader
 
+import requests
+
 def experiment(request, experimentNumber):
 
     # Get the experiment information from firebase
@@ -28,3 +30,16 @@ def begin(request, experimentNumber):
     context = {'experimentNumber': experimentNumber}
     # Render the template with context
     return HttpResponse(template.render(context, request))
+
+def upload_experiment_data_to_firebase():
+
+    URL = 'https://mutilus-7d3b1-default-rtdb.europe-west1.firebasedatabase.app/Experiments/.json?auth=AIzaSyAQt-LmICWeHMo8tNGDgvh8a0_2OS-nnP0'
+
+    experimentData = {
+
+    }
+
+    response = requests.post(URL, data=experimentData,headers={"Content-Type": "application/json"})
+
+    if (response.status_code != 200) :
+            raise Exception("An error occurred pushing to Firebase: " + response.text)
