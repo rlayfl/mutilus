@@ -21,3 +21,4 @@ function validateBeginForm() {
 
     return isValidated
 }
+
