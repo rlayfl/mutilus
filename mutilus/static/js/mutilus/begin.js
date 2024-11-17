@@ -34,11 +34,15 @@ function storeExperimentAtFirebase(uid, password) {
 
     alert("Uploading")
 
+    var formData = new FormData()
+    formData.append('uid', uid)
+    formData.append('password', password)
+
     $.ajax(
         {
             url: "/upload_experiment_data_to_firebase/",
             type: "POST",
-            data: "hello",
+            data: formData,
             processData: false,
             contentType: false,
             success: function(response) {
