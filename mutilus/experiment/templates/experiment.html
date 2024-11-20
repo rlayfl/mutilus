@@ -9,11 +9,8 @@
             <div class="col-lg-6">
 
                 <div class="row">
-                    <div class="col-3">
-                    </div>
-                    <div class="col-6">
-                        <h1>Image Here</h1>
-                <img src="{% static 'images/img_v_2-min.jpg' %}" alt="Image" class="img-fluid my-3 my-lg-5">
+                    <div class="col-12">
+                        <img id="buoyImage" src="" alt="Image" class="img-fluid my-3 my-lg-5">
                     </div>
                 </div>
                 
@@ -42,10 +39,53 @@
 
 <script>
 
+    function storeExperimentImageAnswer(uid, answer, realAnswer) {
+
+        var formData = new FormData()
+        formData.append('uid', uid)
+        formData.append('answer', answer)
+        formData.append('realAnswer', realAnswer)
+    
+        $.ajax(
+            {
+                url: "/upload_experiment_answer_to_firebase/",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+    
+                    alert("Experiment Created")
+    
+                    window.location.replace("/experiment/"+response.uid)
+    
+                    // $('#loading-animation-container').addClass("d-none")
+                    // $('#form').removeClass("d-none")
+    
+                    // worstCaseGameStates = response['finalResult']['worst_case']['game_state:']
+    
+                    // worstCaseGameStates.forEach(appendGameStatesToResultsView)
+                },
+                error: function(error) {
+    
+                    //$('#loading-animation-container').addClass("d-none")
+                    //$('#form').removeClass("d-none")
+                }
+            }
+        )
+    }
+
+
     // This is funky and needs changing from paragraphs but it's okay for now
     $('p').click(function(){
         alert($(this).data('value'));
+
+        storeExperimentImageAnswer("hello", $(this).data('value'), 1)
     })
+
+    var potentialImages = ["{% static 'images/marker_buoys/unreal_cm_east_1.png' %}", "{% static 'images/marker_buoys/unreal_cm_east_2.png' %}", "{% static 'images/marker_buoys/unreal_cm_east_3.png' %}", "{% static 'images/marker_buoys/unreal_idm_1.png' %}", "{% static 'images/marker_buoys/unreal_port_lm_1.png' %}"]
+
+    $('#buoyImage').attr("src",potentialImages[0]);
 
 </script>
 

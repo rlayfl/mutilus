@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from experiment.views import upload_experiment_data_to_firebase
+from experiment.views import upload_experiment_data_to_firebase, upload_experiment_answer_to_firebase
 
 urlpatterns = [
     path('', include('main.urls')),
     path('experiment/', include('experiment.urls')),
     path('markerbuoys/', include('markerbuoys.urls')),
     path('admin/', admin.site.urls),
-    path('upload_experiment_data_to_firebase/', upload_experiment_data_to_firebase)
+    path('upload_experiment_data_to_firebase/', upload_experiment_data_to_firebase),
+    path('upload_experiment_answer_to_firebase/', upload_experiment_answer_to_firebase)
 ]

@@ -32,8 +32,6 @@ function validateBeginForm() {
 
 function storeExperimentAtFirebase(uid, password) {
 
-    alert("Uploading")
-
     var formData = new FormData()
     formData.append('uid', uid)
     formData.append('password', password)
