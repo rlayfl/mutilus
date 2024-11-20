@@ -47,7 +47,6 @@ function storeExperimentAtFirebase(uid, password) {
             contentType: false,
             success: function(response) {
 
-                alert(JSON.stringify(response))
 
                 // $('#loading-animation-container').addClass("d-none")
                 // $('#form').removeClass("d-none")
@@ -57,7 +56,6 @@ function storeExperimentAtFirebase(uid, password) {
                 // worstCaseGameStates.forEach(appendGameStatesToResultsView)
             },
             error: function(error) {
-                alert("Error: ", error)
 
                 //$('#loading-animation-container').addClass("d-none")
                 //$('#form').removeClass("d-none")

@@ -38,7 +38,6 @@ def upload_experiment_data_to_firebase(formData):
     uid = formData.POST['uid']
     password = formData.POST['password']
 
-
     URL = 'https://mutilus-7d3b1-default-rtdb.europe-west1.firebasedatabase.app/experiments/.json?auth=AIzaSyAQt-LmICWeHMo8tNGDgvh8a0_2OS-nnP0'
 
     jsondata = {
@@ -48,11 +47,15 @@ def upload_experiment_data_to_firebase(formData):
 
     response = requests.post(URL, json=jsondata, headers={"Content-Type": "application/json"})
 
-    # response = JsonResponse(status = 200, data={'uid': uid, 'password': password, 'timestamp': time.time()} )
-
+    print("RESPONSEEEE")
     print(response.text)
+    print(response.status_code)
 
     if (response.status_code != 200) :
-             raise Exception("An error occurred pushing to Firebase: " + response.text)
+             raise Exception("An error occurred pushing to Firebase: " + response.text)    
     
-    return response
+    return JsonResponse({
+        "message": "Data successfully uploaded to Firebase",
+        "firebase_response": response.json(),
+        "status_code": response.status_code
+    })
