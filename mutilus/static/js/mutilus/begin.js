@@ -47,6 +47,9 @@ function storeExperimentAtFirebase(uid, password) {
             contentType: false,
             success: function(response) {
 
+                alert("Experiment Created")
+
+                window.location.replace("/experiment/"+response.uid)
 
                 // $('#loading-animation-container').addClass("d-none")
                 // $('#form').removeClass("d-none")

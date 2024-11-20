@@ -56,6 +56,6 @@ def upload_experiment_data_to_firebase(formData):
     
     return JsonResponse({
         "message": "Data successfully uploaded to Firebase",
-        "firebase_response": response.json(),
+        "uid": uid,
         "status_code": response.status_code
     })

@@ -16,26 +16,23 @@
                 <img src="{% static 'images/img_v_2-min.jpg' %}" alt="Image" class="img-fluid my-3 my-lg-5">
                     </div>
                 </div>
-
-                
-
                 
                 <div class="row">
                     <div class="col-lg-4">
-                        <p><a href="#" class="btn btn-primary">Cardinal Mark North</a></p>
-                        <p><a href="#" class="btn btn-primary">Cardinal Mark East</a></p>
-                        <p><a href="#" class="btn btn-primary">Cardinal Mark South</a></p>
+                        <p id="cmn" data-value="1"><a href="#" class="btn btn-primary">Cardinal Mark North</a></p>
+                        <p id="cme" data-value="2"><a href="#" class="btn btn-primary">Cardinal Mark East</a></p>
+                        <p id="cms" data-value="3"><a href="#" class="btn btn-primary">Cardinal Mark South</a></p>
                         
                     </div>
                     <div class="col-lg-4">
-                        <p><a href="#" class="btn btn-primary">Cardinal Mark West</a></p>
-                        <p><a href="#" class="btn btn-primary">Special Mark Class 2 Solar</a></p>
-                        <p><a href="#" class="btn btn-primary">Isolated Danger Mark</a></p>
+                        <p id="cmw" data-value="4"><a href="#" class="btn btn-primary">Cardinal Mark West</a></p>
+                        <p id="smc2s" data-value="5"><a href="#" class="btn btn-primary">Special Mark Class 2 Solar</a></p>
+                        <p id="idm" data-value="6"><a href="#" class="btn btn-primary">Isolated Danger Mark</a></p>
                     </div>
                     <div class="col-lg-4">
-                        <p><a href="#" class="btn btn-primary">Safe Water Mark Type 2</a></p>                        
-                        <p><a href="#" class="btn btn-primary">Port (Left) Side Marker</a></p>
-                        <p><a href="#" class="btn btn-primary">Starboard (Right) Side Marker</a></p>
+                        <p id="swmt2" data-value="7"><a href="#" class="btn btn-primary">Safe Water Mark Type 2</a></p>                        
+                        <p id="psm" data-value="8"><a href="#" class="btn btn-primary">Port (Left) Side Marker</a></p>
+                        <p id="ssm" data-value="9"><a href="#" class="btn btn-primary">Starboard (Right) Side Marker</a></p>
                     </div>
                 </div>
             </div>
@@ -43,18 +40,13 @@
     </div>
 </div>
 
-<div class="custom-hero section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h1>Let's Get Started</h1>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                    the blind texts.</p>
-                <p><a href="#" class="btn btn-primary">Review Buoys</a></p>
-                <p><a href="#" class="btn btn-primary">Begin Experiment</a></p>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+
+    // This is funky and needs changing from paragraphs but it's okay for now
+    $('p').click(function(){
+        alert($(this).data('value'));
+    })
+
+</script>
 
 {% endblock %}
