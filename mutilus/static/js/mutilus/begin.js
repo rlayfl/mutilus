@@ -22,8 +22,6 @@ function validateBeginForm() {
         isValidated = false
     }
 
-    alert(uid + " " + password)
-
     storeExperimentAtFirebase(uid, password)
 
     // Change this
@@ -44,8 +42,6 @@ function storeExperimentAtFirebase(uid, password) {
             processData: false,
             contentType: false,
             success: function(response) {
-
-                alert("Experiment Created")
 
                 window.location.replace("/experiment/?experiment="+response.uid)
 
