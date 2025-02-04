@@ -50,6 +50,7 @@
         formData.append('uid', uid)
         formData.append('answer', answer)
         formData.append('realAnswer', realAnswer)
+        formData.append('timeElapsed', $('#time-elapsed').text())
     
         $.ajax(
             {
@@ -90,7 +91,6 @@
 
     // This is funky and needs changing from paragraphs but it's okay for now
     $('p').click(function(){
-        alert($(this).data('value'));
 
         storeExperimentImageAnswer(experimentValue, $(this).data('value'), 1)
     })
