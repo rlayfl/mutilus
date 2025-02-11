@@ -9,31 +9,165 @@
             <div class="col-lg-6">
 
                 <div class="row">
+
+                    <!-- Time elapsed shown here -->
                     <div class="col-12">
                         Time elapsed: <span id="time-elapsed">0</span> milliseconds
                     </div>
+
+                    <!-- Image of buoy shown here -->
                     <div class="col-12">
                         <img id="buoyImage" src="" alt="Image" class="img-fluid my-3 my-lg-5">
                     </div>
                 </div>
                 
+                <!-- Buoys Text Buttons -->
+                <div class="row d-none">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p id="cmn" data-value="1"><a href="#" class="btn btn-primary">Cardinal Mark North</a></p>
+                            </div>
+                            <div class="col-4">
+                                <p id="cme" data-value="2"><a href="#" class="btn btn-primary">Cardinal Mark East</a></p>
+                            </div>
+    
+                            <div class="col-4">
+                                <p id="cms" data-value="3"><a href="#" class="btn btn-primary">Cardinal Mark South</a></p> 
+                            </div>
+                        </div>                 
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p id="cmw" data-value="4"><a href="#" class="btn btn-primary">Cardinal Mark West</a></p>
+                            </div>
+                            <div class="col-4">
+                                <p id="smc2s" data-value="5"><a href="#" class="btn btn-primary">Special Mark Class 2 Solar</a></p>
+                            </div>
+                            <div class="col-4">
+                                <p id="idm" data-value="6"><a href="#" class="btn btn-primary">Isolated Danger Mark</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p id="swmt2" data-value="7"><a href="#" class="btn btn-primary">Safe Water Mark Type 2</a></p>                        
+                            </div>
+                            <div class="col-4">
+                                <p id="psm" data-value="8"><a href="#" class="btn btn-primary">Port (Left) Side Marker</a></p>
+                            </div>
+                            <div class="col-4">
+                                <p id="ssm" data-value="9"><a href="#" class="btn btn-primary">Starboard (Right) Side Marker</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buoys Text Buttons Random Order -->
                 <div class="row">
-                    <div class="col-lg-4">
-                        <p id="cmn" data-value="1"><a href="#" class="btn btn-primary">Cardinal Mark North</a></p>
-                        <p id="cme" data-value="2"><a href="#" class="btn btn-primary">Cardinal Mark East</a></p>
-                        <p id="cms" data-value="3"><a href="#" class="btn btn-primary">Cardinal Mark South</a></p>
-                        
+                    <div class="col-lg-12">
+                        <div class="row">
+                            {% for button in buttons %}
+                                {% if forloop.counter0|divisibleby:3 and not forloop.first %}
+                                    </div>
+                                    <div class="row">
+                                {% endif %}
+                                <div class="col-4">
+                                    <p id="{{ button.id }}" data-value="{{ button.data_value }}">
+                                        <a href="#" class="btn btn-primary">{{ button.text }}</a>
+                                    </p>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="col-lg-4">
-                        <p id="cmw" data-value="4"><a href="#" class="btn btn-primary">Cardinal Mark West</a></p>
-                        <p id="smc2s" data-value="5"><a href="#" class="btn btn-primary">Special Mark Class 2 Solar</a></p>
-                        <p id="idm" data-value="6"><a href="#" class="btn btn-primary">Isolated Danger Mark</a></p>
+                </div>
+
+                <!-- Buoys Picture Buttons -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p id="cmn-img" data-value="1">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/cmn.png' %}" alt="Cardinal Mark North" width="50" height="50">
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="col-4">
+                                <p id="cme-img" data-value="2">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/cme.png' %}" alt="Cardinal Mark East" width="50" height="50">
+                                    </a>
+                                </p>
+
+                            </div>
+
+                            <div class="col-4">
+                                <p id="cms-img" data-value="3">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/cms.png' %}" alt="Cardinal Mark South" width="50" height="50">
+                                    </a>
+                                </p>
+                            </div>
                     </div>
-                    <div class="col-lg-4">
-                        <p id="swmt2" data-value="7"><a href="#" class="btn btn-primary">Safe Water Mark Type 2</a></p>                        
-                        <p id="psm" data-value="8"><a href="#" class="btn btn-primary">Port (Left) Side Marker</a></p>
-                        <p id="ssm" data-value="9"><a href="#" class="btn btn-primary">Starboard (Right) Side Marker</a></p>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p id="cmw-img" data-value="4">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/cmw.png' %}" alt="Cardinal Mark West" width="50" height="50">
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="col-4">
+                                <p id="smc2s-img" data-value="5">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/swm.png' %}" alt="Special Mark Class 2 Solar" width="50" height="50">
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="col-4">
+                                <p id="idm-img" data-value="6">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/idm.png' %}" alt="Isolated Danger Mark" width="50" height="50">
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p id="swmt2-img" data-value="7">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/swm.png' %}" alt="Safe Water Mark Type 2" width="50" height="50">
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-4">
+                                <p id="psm-img" data-value="8">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/port.png' %}" alt="Port (Left) Side Marker" width="50" height="50">
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-4">
+                                <p id="ssm-img" data-value="9">
+                                    <a href="#" class="btn">
+                                        <img src="{% static 'images/marker_buoys/2d/starboard.png' %}" alt="Starboard (Right) Side Marker" width="50" height="50">
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>

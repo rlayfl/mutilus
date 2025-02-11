@@ -4,6 +4,7 @@ from django.template import loader
 import requests
 import time
 import json
+import random
 
 def experiment(request, experimentNumber):
 
@@ -14,13 +15,30 @@ def experiment(request, experimentNumber):
     # For each image, show some options to click
 
     # Store the result
-    
 
+    # Define the buttons list
+    buttons = [
+        {'id': 'cmn', 'data_value': 1, 'text': 'Cardinal Mark North'},
+        {'id': 'cme', 'data_value': 2, 'text': 'Cardinal Mark East'},
+        {'id': 'cms', 'data_value': 3, 'text': 'Cardinal Mark South'},
+        {'id': 'cmw', 'data_value': 4, 'text': 'Cardinal Mark West'},
+        {'id': 'smc2s', 'data_value': 5, 'text': 'Special Mark Class 2 Solar'},
+        {'id': 'idm', 'data_value': 6, 'text': 'Isolated Danger Mark'},
+        {'id': 'swmt2', 'data_value': 7, 'text': 'Safe Water Mark Type 2'},
+        {'id': 'psm', 'data_value': 8, 'text': 'Port (Left) Side Marker'},
+        {'id': 'ssm', 'data_value': 9, 'text': 'Starboard (Right) Side Marker'}
+    ]
+    
+    # Shuffle the buttons list
+    random.shuffle(buttons)
 
     # Load the experiment template
     template = loader.get_template('experiment.html')
-    # Context with experimentNumber
-    context = {'experimentNumber': experimentNumber}
+    # Context with experimentNumber and buttons
+    context = {
+        'experimentNumber': experimentNumber,
+        'buttons': buttons
+    }
     # Render the template with context
     return HttpResponse(template.render(context, request))
 
