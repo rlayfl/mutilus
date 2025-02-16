@@ -5,16 +5,34 @@ import requests
 import time
 import json
 import random
+import os
+from django.conf import settings
+from PIL import Image
 
 def experiment(request, experimentNumber):
 
-    # Get the experiment information from firebase
+    # Define the path to the images directory
+    images_path = os.path.join(settings.STATICFILES_DIRS[0], 'images', 'marker_buoys', 'real', 'cardinal_mark_north')
 
-    # Decide the list of images which are going to be shown
+    print(images_path)
 
-    # For each image, show some options to click
+    # Get the list of image files
+    image_files = [f for f in os.listdir(images_path) if os. path.isfile(os.path.join(images_path, f))]
 
-    # Store the result
+    # Create an array to hold image information
+    images_info = []
+
+    # Loop through the image files and get their resolution
+    for image_file in image_files:
+        image_path = os.path.join(images_path, image_file)
+        with Image.open(image_path) as img:
+            width, height = img.size
+            images_info.append({
+                'filename': image_file,
+                'width': width,
+                'height': height,
+                'type': '1'
+            })
 
     # Define the buttons list
     buttons = [
@@ -34,11 +52,15 @@ def experiment(request, experimentNumber):
 
     # Load the experiment template
     template = loader.get_template('experiment.html')
-    # Context with experimentNumber and buttons
+    # Context with experimentNumber, buttons, and images_info
     context = {
         'experimentNumber': experimentNumber,
-        'buttons': buttons
+        'buttons': buttons,
+        'images_info': images_info
     }
+
+    print(images_info)
+
     # Render the template with context
     return HttpResponse(template.render(context, request))
 

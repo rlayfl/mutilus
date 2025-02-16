@@ -17,7 +17,9 @@
 
                     <!-- Image of buoy shown here -->
                     <div class="col-12">
-                        <img id="buoyImage" src="" alt="Image" class="img-fluid my-3 my-lg-5">
+                        {% for image_info in images_info %}
+                            <img id="buoyImage-{{ forloop.counter0 }}" src="{% static 'images/marker_buoys/real/cardinal_mark_north/' %}{{ image_info.filename }}" alt="Image" class="img-fluid my-3 my-lg-5 {% if not forloop.first %}d-none{% endif %}" data-type="{{ image_info.type }}" data-number="{{ forloop.counter0 }}">
+                        {% endfor %}
                     </div>
                 </div>
                 
@@ -180,10 +182,12 @@
 
     function storeExperimentImageAnswer(uid, answer, realAnswer) {
 
+        var currentImage = $('img:not(.d-none)');
+
         var formData = new FormData()
         formData.append('uid', uid)
         formData.append('answer', answer)
-        formData.append('realAnswer', realAnswer)
+        formData.append('realAnswer', currentImage.data('type'))
         formData.append('timeElapsed', $('#time-elapsed').text())
     
         $.ajax(
@@ -195,7 +199,14 @@
                 contentType: false,
                 success: function(response) {
     
-                    window.location.replace("/experiment/?experiment="+response.uid)
+                    //window.location.replace("/experiment/?experiment="+response.uid)
+
+                    var currentImage = $('img:not(.d-none)');
+                    var nextImage = currentImage.next('img');
+                    if (nextImage.length) {
+                        currentImage.addClass('d-none');
+                        nextImage.removeClass('d-none');
+                    }
     
                     // $('#loading-animation-container').addClass("d-none")
                     // $('#form').removeClass("d-none")
@@ -226,12 +237,8 @@
     // This is funky and needs changing from paragraphs but it's okay for now
     $('p').click(function(){
 
-        storeExperimentImageAnswer(experimentValue, $(this).data('value'), 1)
+        storeExperimentImageAnswer(experimentValue, $(this).data('value'))
     })
-
-    var potentialImages = ["{% static 'images/marker_buoys/unreal_cm_east_1.png' %}", "{% static 'images/marker_buoys/unreal_cm_east_2.png' %}", "{% static 'images/marker_buoys/unreal_cm_east_3.png' %}", "{% static 'images/marker_buoys/unreal_idm_1.png' %}", "{% static 'images/marker_buoys/unreal_port_lm_1.png' %}"]
-
-    $('#buoyImage').attr("src",potentialImages[0]);
 
 </script>
 
