@@ -23,11 +23,12 @@
                                  alt="Image" 
                                  class="img-fluid my-3 my-lg-5 buoy-image {% if not forloop.first %}d-none{% endif %}" 
                                  data-type="{{ image_info.type }}" 
-                                 data-number="{{ forloop.counter0 }}" 
+                                 data-number="{{ image_info.image_number }}" 
                                  data-height="{{ image_info.height }}" 
                                  data-width="{{ image_info.width }}" 
                                  data-is-synthetic="{{ image_info.is_synthetic }}"
-                                 data-filename="{{ image_info.filename }}">
+                                 data-filename="{{ image_info.filename }}"
+                                 data-answer-number="{{ forloop.counter0 }}">
                         {% endfor %}
                     </div>
                 </div>
@@ -202,6 +203,7 @@
         formData.append('imageWidth', currentImage.data('width'));
         formData.append('isSynthetic', currentImage.data('is-synthetic'));
         formData.append('filename', currentImage.data('filename'));
+        formData.append('answerNumber', currentImage.data('answer-number'));
 
         $.ajax({
             url: "/upload_experiment_answer_to_firebase/",

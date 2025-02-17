@@ -22,6 +22,7 @@ def experiment(request, experimentNumber):
     # Create an array to hold image information
     images_info = []
     buoy_type = 1
+    image_number = 1
 
     # Loop through the real image files and get their resolution
     for image_file in real_image_files:
@@ -33,8 +34,10 @@ def experiment(request, experimentNumber):
                 'width': width,
                 'height': height,
                 'type': buoy_type,
-                "is_synthetic": False
+                'is_synthetic': False,
+                'image_number': image_number
             })
+            image_number += 1
 
     # Loop through the synthetic image files and get their resolution
     for image_file in synthetic_image_files:
@@ -46,8 +49,13 @@ def experiment(request, experimentNumber):
                 'width': width,
                 'height': height,
                 'type': buoy_type,
-                "is_synthetic": True
+                'is_synthetic': True,
+                'image_number': image_number
             })
+            image_number += 1
+
+    # Shuffle the order of images_info
+    random.shuffle(images_info)
 
     # Define the buttons list
     buttons = [
@@ -122,6 +130,7 @@ def upload_experiment_answer_to_firebase(request):
     imageWidth = request.POST['imageWidth']
     isSynthetic = request.POST['isSynthetic']
     filename = request.POST['filename']
+    answerNumber = request.POST['answerNumber']
 
     URL = f'https://mutilus-7d3b1-default-rtdb.europe-west1.firebasedatabase.app/answers/{uid}.json?auth=AIzaSyAQt-LmICWeHMo8tNGDgvh8a0_2OS-nnP0'
 
@@ -133,7 +142,8 @@ def upload_experiment_answer_to_firebase(request):
         "imageHeight": imageHeight,
         "imageWidth": imageWidth,
         "isSynthetic": isSynthetic,
-        "filename": filename
+        "filename": filename,
+        "answerNumber": answerNumber
     }
 
     response = requests.post(URL, json=jsondata, headers={"Content-Type": "application/json"})
