@@ -11,27 +11,42 @@ from PIL import Image
 
 def experiment(request, experimentNumber):
 
-    # Define the path to the images directory
-    images_path = os.path.join(settings.STATICFILES_DIRS[0], 'images', 'marker_buoys', 'real', 'cardinal_mark_north')
+    # Define the path to the images directories
+    real_images_path = os.path.join(settings.STATICFILES_DIRS[0], 'images', 'marker_buoys', 'real', 'cardinal_mark_north')
+    synthetic_images_path = os.path.join(settings.STATICFILES_DIRS[0], 'images', 'marker_buoys', 'synthetic', 'cardinal_mark_north')
 
-    print(images_path)
-
-    # Get the list of image files
-    image_files = [f for f in os.listdir(images_path) if os. path.isfile(os.path.join(images_path, f))]
+    # Get the list of image files for real and fake images
+    real_image_files = [f for f in os.listdir(real_images_path) if os.path.isfile(os.path.join(real_images_path, f))]
+    synthetic_image_files = [f for f in os.listdir(synthetic_images_path) if os.path.isfile(os.path.join(synthetic_images_path, f))]
 
     # Create an array to hold image information
     images_info = []
+    buoy_type = 1
 
-    # Loop through the image files and get their resolution
-    for image_file in image_files:
-        image_path = os.path.join(images_path, image_file)
+    # Loop through the real image files and get their resolution
+    for image_file in real_image_files:
+        image_path = os.path.join(real_images_path, image_file)
         with Image.open(image_path) as img:
             width, height = img.size
             images_info.append({
                 'filename': image_file,
                 'width': width,
                 'height': height,
-                'type': '1'
+                'type': buoy_type,
+                "is_synthetic": False
+            })
+
+    # Loop through the synthetic image files and get their resolution
+    for image_file in synthetic_image_files:
+        image_path = os.path.join(synthetic_images_path, image_file)
+        with Image.open(image_path) as img:
+            width, height = img.size
+            images_info.append({
+                'filename': image_file,
+                'width': width,
+                'height': height,
+                'type': buoy_type,
+                "is_synthetic": True
             })
 
     # Define the buttons list
@@ -46,9 +61,6 @@ def experiment(request, experimentNumber):
         {'id': 'psm', 'data_value': 8, 'text': 'Port (Left) Side Marker'},
         {'id': 'ssm', 'data_value': 9, 'text': 'Starboard (Right) Side Marker'}
     ]
-    
-    # Shuffle the buttons list
-    random.shuffle(buttons)
 
     # Load the experiment template
     template = loader.get_template('experiment.html')
@@ -100,26 +112,35 @@ def upload_experiment_data_to_firebase(formData):
         "status_code": response.status_code
     })
 
-def upload_experiment_answer_to_firebase(formData):
-     
-    uid = formData.POST['uid']
-    answer = formData.POST['answer']
-    realAnswer = formData.POST['realAnswer']
-    timeElapsed = formData.POST['timeElapsed']
+def upload_experiment_answer_to_firebase(request):
+    uid = request.POST['uid']
+    answer = request.POST['answer']
+    realAnswer = request.POST['realAnswer']
+    timeElapsed = request.POST['timeElapsed']
+    imageNumber = request.POST['imageNumber']
+    imageHeight = request.POST['imageHeight']
+    imageWidth = request.POST['imageWidth']
+    isSynthetic = request.POST['isSynthetic']
+    filename = request.POST['filename']
 
-    URL = 'https://mutilus-7d3b1-default-rtdb.europe-west1.firebasedatabase.app/answers/'+uid+'.json?auth=AIzaSyAQt-LmICWeHMo8tNGDgvh8a0_2OS-nnP0'
+    URL = f'https://mutilus-7d3b1-default-rtdb.europe-west1.firebasedatabase.app/answers/{uid}.json?auth=AIzaSyAQt-LmICWeHMo8tNGDgvh8a0_2OS-nnP0'
 
     jsondata = {
         "answer": answer,
         "realAnswer": realAnswer,
-        "timeElapsed": timeElapsed
+        "timeElapsed": timeElapsed,
+        "imageNumber": imageNumber,
+        "imageHeight": imageHeight,
+        "imageWidth": imageWidth,
+        "isSynthetic": isSynthetic,
+        "filename": filename
     }
-     
+
     response = requests.post(URL, json=jsondata, headers={"Content-Type": "application/json"})
 
-    if (response.status_code != 200) :
-             raise Exception("An error occurred pushing to Firebase: " + response.text)    
-    
+    if response.status_code != 200:
+        raise Exception("An error occurred pushing to Firebase: " + response.text)
+
     return JsonResponse({
         "message": "Data successfully uploaded to Firebase",
         "uid": uid,

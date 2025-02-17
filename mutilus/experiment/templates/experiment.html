@@ -18,7 +18,16 @@
                     <!-- Image of buoy shown here -->
                     <div class="col-12">
                         {% for image_info in images_info %}
-                            <img id="buoyImage-{{ forloop.counter0 }}" src="{% static 'images/marker_buoys/real/cardinal_mark_north/' %}{{ image_info.filename }}" alt="Image" class="img-fluid my-3 my-lg-5 {% if not forloop.first %}d-none{% endif %}" data-type="{{ image_info.type }}" data-number="{{ forloop.counter0 }}">
+                            <img id="buoyImage-{{ forloop.counter0 }}" 
+                                 src="{% static 'images/marker_buoys/' %}{{ image_info.is_synthetic|yesno:'synthetic,real' }}/cardinal_mark_north/{{ image_info.filename }}" 
+                                 alt="Image" 
+                                 class="img-fluid my-3 my-lg-5 buoy-image {% if not forloop.first %}d-none{% endif %}" 
+                                 data-type="{{ image_info.type }}" 
+                                 data-number="{{ forloop.counter0 }}" 
+                                 data-height="{{ image_info.height }}" 
+                                 data-width="{{ image_info.width }}" 
+                                 data-is-synthetic="{{ image_info.is_synthetic }}"
+                                 data-filename="{{ image_info.filename }}">
                         {% endfor %}
                     </div>
                 </div>
@@ -32,8 +41,7 @@
                             </div>
                             <div class="col-4">
                                 <p id="cme" data-value="2"><a href="#" class="btn btn-primary">Cardinal Mark East</a></p>
-                            </div>
-    
+                            </div>    
                             <div class="col-4">
                                 <p id="cms" data-value="3"><a href="#" class="btn btn-primary">Cardinal Mark South</a></p> 
                             </div>
@@ -180,48 +188,40 @@
 
 <script>
 
-    function storeExperimentImageAnswer(uid, answer, realAnswer) {
+    function storeExperimentImageAnswer(uid, answer) {
 
         var currentImage = $('img:not(.d-none)');
 
-        var formData = new FormData()
-        formData.append('uid', uid)
-        formData.append('answer', answer)
-        formData.append('realAnswer', currentImage.data('type'))
-        formData.append('timeElapsed', $('#time-elapsed').text())
-    
-        $.ajax(
-            {
-                url: "/upload_experiment_answer_to_firebase/",
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-    
-                    //window.location.replace("/experiment/?experiment="+response.uid)
+        var formData = new FormData();
+        formData.append('uid', uid);
+        formData.append('answer', answer);
+        formData.append('realAnswer', currentImage.data('type'));
+        formData.append('timeElapsed', $('#time-elapsed').text());
+        formData.append('imageNumber', currentImage.data('number'));
+        formData.append('imageHeight', currentImage.data('height'));
+        formData.append('imageWidth', currentImage.data('width'));
+        formData.append('isSynthetic', currentImage.data('is-synthetic'));
+        formData.append('filename', currentImage.data('filename'));
 
-                    var currentImage = $('img:not(.d-none)');
-                    var nextImage = currentImage.next('img');
-                    if (nextImage.length) {
-                        currentImage.addClass('d-none');
-                        nextImage.removeClass('d-none');
-                    }
-    
-                    // $('#loading-animation-container').addClass("d-none")
-                    // $('#form').removeClass("d-none")
-    
-                    // worstCaseGameStates = response['finalResult']['worst_case']['game_state:']
-    
-                    // worstCaseGameStates.forEach(appendGameStatesToResultsView)
-                },
-                error: function(error) {
-    
-                    //$('#loading-animation-container').addClass("d-none")
-                    //$('#form').removeClass("d-none")
+        $.ajax({
+            url: "/upload_experiment_answer_to_firebase/",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+
+                var currentImage = $('img:not(.d-none)');
+                var nextImage = currentImage.next('img');
+                if (nextImage.length) {
+                    currentImage.addClass('d-none');
+                    nextImage.removeClass('d-none');
                 }
+            },
+            error: function(error) {
+                console.error("Error uploading data:", error);
             }
-        )
+        });
     }
 
     // Get the current URL
