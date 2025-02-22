@@ -24,3 +24,9 @@ You are a police officer, part of the marine unit of Essex Police. You have rece
 
 You must rapidly remind yourself of each type of marker buoy. You will then be sent photographs of marker buoys and will need to quickly identify each one, allowing enough time for the ship's navigator to plot a course. 
 
+## Installation
+
+Install chocolatey
+
+Install docker-cli
+
