@@ -27,6 +27,7 @@ You must rapidly remind yourself of each type of marker buoy. You will then be s
 ## Installation
 
 Install chocolatey
+https://chocolatey.org/install#individual
 
 Install docker-cli
 
