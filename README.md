@@ -26,8 +26,12 @@ You must rapidly remind yourself of each type of marker buoy. You will then be s
 
 ## Installation
 
-Install chocolatey
-https://chocolatey.org/install#individual
+IIS Server as reverse proxy
+https://www.tevpro.com/blog/using-iis-as-a-reverse-proxy-server
 
-Install docker-cli
 
+Make sure to collect static file
+
+py manage.py collectstatic
+
+Set up staticfiles as virtual directory in IIS
