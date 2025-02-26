@@ -23,6 +23,7 @@
                                  alt="Image" 
                                  class="img-fluid my-3 my-lg-5 buoy-image {% if not forloop.first %}d-none{% endif %}" 
                                  data-type="{{ image_info.type }}" 
+                                 data-typeid="{{ image_info.type_ID }}"
                                  data-number="{{ image_info.image_number }}" 
                                  data-height="{{ image_info.height }}" 
                                  data-width="{{ image_info.width }}" 
@@ -196,7 +197,7 @@
         var formData = new FormData();
         formData.append('uid', uid);
         formData.append('answer', answer);
-        formData.append('realAnswer', currentImage.data('type'));
+        formData.append('realAnswer', currentImage.data('typeid'));
         formData.append('timeElapsed', $('#time-elapsed').text());
         formData.append('imageNumber', currentImage.data('number'));
         formData.append('imageHeight', currentImage.data('height'));

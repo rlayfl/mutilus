@@ -38,6 +38,8 @@ def experiment(request, experimentNumber):
         real_image_files = [f for f in os.listdir(os.path.join(real_images_path, buoy_type)) if os.path.isfile(os.path.join(real_images_path, buoy_type, f))]
         synthetic_image_files = [f for f in os.listdir(os.path.join(synthetic_images_path, buoy_type)) if os.path.isfile(os.path.join(synthetic_images_path, buoy_type, f))]
 
+        print(type_id)
+
         # Loop through the real image files and get their resolution
         for image_file in real_image_files:
             image_path = os.path.join(real_images_path, buoy_type, image_file)
@@ -48,7 +50,7 @@ def experiment(request, experimentNumber):
                     'width': width,
                     'height': height,
                     'type': buoy_type,
-                    'typeID': type_id,
+                    'type_ID': type_id,
                     'is_synthetic': False,
                     'image_number': image_number
                 })
@@ -64,7 +66,7 @@ def experiment(request, experimentNumber):
                     'width': width,
                     'height': height,
                     'type': buoy_type,
-                    'typeID': type_id,
+                    'type_ID': type_id,
                     'is_synthetic': True,
                     'image_number': image_number
                 })
