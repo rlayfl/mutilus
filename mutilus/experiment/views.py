@@ -174,3 +174,27 @@ def upload_experiment_answer_to_firebase(request):
         "uid": uid,
         "status_code": response.status_code
     })
+
+
+def results(request, experimentNumber):
+    # Load the begin template
+    template = loader.get_template('results.html')
+    # Context with experimentNumber
+    context = {'hello': "hello"}
+    # Render the template with context
+    return HttpResponse(template.render(context, request))
+
+
+def get_all_experiment_data_from_firebase(request):
+    URL = 'https://mutilus-7d3b1-default-rtdb.europe-west1.firebasedatabase.app/answers.json?auth=AIzaSyAQt-LmICWeHMo8tNGDgvh8a0_2OS-nnP0'
+
+    response = requests.get(URL, headers={"Content-Type": "application/json"})
+    
+    if response.status_code != 200:
+        raise Exception("An error occurred fetching data from Firebase: " + response.text)
+    
+    return JsonResponse({
+        "message": "Data successfully fetched from Firebase",
+        "data": response.json(),
+        "status_code": response.status_code
+    })

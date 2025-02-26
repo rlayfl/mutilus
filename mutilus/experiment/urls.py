@@ -8,5 +8,6 @@ urlpatterns = [
 
     # Optional: Default URL to experiment with a default experiment number
     path('', views.experiment, {'experimentNumber': 1}, name='experiment_default'),
-    path('begin/', views.begin, {'experimentNumber': 1}, name='begin_default')    
+    path('begin/', views.begin, {'experimentNumber': 1}, name='begin_default'),
+    path('results/', views.results, {'experimentNumber': 1}, name='results_default'),
 ]

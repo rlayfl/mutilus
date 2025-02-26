@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div id="results-table"></div>
+
+<script>
+$.ajax({
+    url: "/get_all_experiment_data_from_firebase/",
+    type: "POST",
+    processData: false,
+    contentType: false,
+    success: function(response) {
+        let table = '<table border="1"><tr><th>Key</th><th>Answer Number</th><th>Answer</th><th>Real Answer</th><th>Filename</th><th>Image Height</th><th>Image Number</th><th>Image Width</th><th>Is Synthetic</th><th>Time Elapsed</th></tr>';
+        
+        console.log(response.data); 
+
+        for (const test in response.data) {
+            if (response.data.hasOwnProperty(test)) {
+            table += `<tr><td colspan="10"><strong>${test}</strong></td></tr>`;
+            for (const key in response.data[test]) {
+                if (response.data[test].hasOwnProperty(key)) {
+                const entry = response.data[test][key];
+                table += `<tr>
+                    <td>${key}</td>
+                    <td>${entry.answerNumber}</td>
+                    <td>${entry.answer}</td>
+                    <td>${entry.realAnswer}</td>                    
+                    <td>${entry.filename}</td>
+                    <td>${entry.imageHeight}</td>
+                    <td>${entry.imageNumber}</td>
+                    <td>${entry.imageWidth}</td>
+                    <td>${entry.isSynthetic}</td>
+                    
+                    <td>${entry.timeElapsed}</td>
+                      </tr>`;
+                }
+            }
+            }
+        }
+          
+        table += '</table>';
+        document.getElementById('results-table').innerHTML = table;
+    },
+    error: function(error) {
+        console.error("Error uploading data:", error);
+    }
+});
+
+
+</script>
+
+{% endblock %}
