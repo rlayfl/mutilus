@@ -9,7 +9,7 @@ import os
 from django.conf import settings
 from PIL import Image
 
-def experiment(request, experimentNumber):
+def experiment(request):
 
     experimentName = request.GET.get('experiment')
 
@@ -97,17 +97,15 @@ def experiment(request, experimentNumber):
         'images_info': images_info
     }
 
-    print(experimentNumber)
-
     # Render the template with context
     return HttpResponse(template.render(context, request))
 
 
-def begin(request, experimentNumber):
+def begin(request):
     # Load the begin template
     template = loader.get_template('begin.html')
     # Context with experimentNumber
-    context = {'experimentNumber': experimentNumber}
+    context = {}
     # Render the template with context
     return HttpResponse(template.render(context, request))
 
@@ -176,10 +174,10 @@ def upload_experiment_answer_to_firebase(request):
     })
 
 
-def results(request, experimentNumber):
+def results(request):
     # Load the begin template
     template = loader.get_template('results.html')
-    # Context with experimentNumber
+    
     context = {'hello': "hello"}
     # Render the template with context
     return HttpResponse(template.render(context, request))

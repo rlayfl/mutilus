@@ -7,7 +7,7 @@ urlpatterns = [
     path('begin/<int:experimentNumber>/', views.begin, name='begin'),
 
     # Optional: Default URL to experiment with a default experiment number
-    path('', views.experiment, {'experimentNumber': 1}, name='experiment_default'),
-    path('begin/', views.begin, {'experimentNumber': 1}, name='begin_default'),
-    path('results/', views.results, {'experimentNumber': 1}, name='results_default'),
+    path('', views.experiment, name='experiment_default'),
+    path('begin/', views.begin, name='begin_default'),
+    path('results/', views.results, name='results_default'),
 ]
