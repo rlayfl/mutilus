@@ -24,3 +24,14 @@ You are a police officer, part of the marine unit of Essex Police. You have rece
 
 You must rapidly remind yourself of each type of marker buoy. You will then be sent photographs of marker buoys and will need to quickly identify each one, allowing enough time for the ship's navigator to plot a course. 
 
+## Installation
+
+IIS Server as reverse proxy
+https://www.tevpro.com/blog/using-iis-as-a-reverse-proxy-server
+
+
+Make sure to collect static file
+
+py manage.py collectstatic
+
+Set up staticfiles as virtual directory in IIS
