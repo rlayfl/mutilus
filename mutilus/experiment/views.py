@@ -11,7 +11,7 @@ from PIL import Image
 
 def experiment(request):
 
-    experimentName = request.GET.get('experiment')
+    showTimer = request.GET.get('st')
 
     # Define the path to the images directories
     real_images_path = os.path.join(settings.STATICFILES_DIRS[0], 'images', 'marker_buoys', 'real')
@@ -92,7 +92,7 @@ def experiment(request):
     template = loader.get_template('experiment.html')
     # Context with experimentNumber, buttons, and images_info
     context = {
-        'experimentName': experimentName,
+        'showTimer': showTimer,
         'buttons': buttons,
         'images_info': images_info
     }
