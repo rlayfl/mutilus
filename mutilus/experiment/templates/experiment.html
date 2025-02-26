@@ -19,7 +19,7 @@
                     <div class="col-12">
                         {% for image_info in images_info %}
                             <img id="buoyImage-{{ forloop.counter0 }}" 
-                                 src="{% static 'images/marker_buoys/' %}{{ image_info.is_synthetic|yesno:'synthetic,real' }}/cardinal_mark_north/{{ image_info.filename }}" 
+                                 src="{% static 'images/marker_buoys/' %}{{ image_info.is_synthetic|yesno:'synthetic,real' }}/{{ image_info.type }}/{{ image_info.filename }}" 
                                  alt="Image" 
                                  class="img-fluid my-3 my-lg-5 buoy-image {% if not forloop.first %}d-none{% endif %}" 
                                  data-type="{{ image_info.type }}" 
