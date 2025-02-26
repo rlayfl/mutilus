@@ -12,16 +12,20 @@ $.ajax({
     processData: false,
     contentType: false,
     success: function(response) {
-        let table = '<table border="1"><tr><th>Key</th><th>Answer Number</th><th>Answer</th><th>Real Answer</th><th>Filename</th><th>Image Height</th><th>Image Number</th><th>Image Width</th><th>Is Synthetic</th><th>Time Elapsed</th></tr>';
+        let table = '<table border="1"><tr><th>Key</th><th>Answer Number</th><th>Answer</th><th>Real Answer</th><th>Filename</th><th>Image Height</th><th>Image Number</th><th>Image Width</th><th>Is Synthetic</th><th>Time Elapsed</th><th>Time Taken</th></tr>';
         
         console.log(response.data); 
 
         for (const test in response.data) {
             if (response.data.hasOwnProperty(test)) {
-            table += `<tr><td colspan="10"><strong>${test}</strong></td></tr>`;
+            table += `<tr><td colspan="11"><strong>${test}</strong></td></tr>`;
+            let totalEntries = 0;
+            let incorrectEntries = 0;
+            let previousTimeElapsed = 0;
             for (const key in response.data[test]) {
                 if (response.data[test].hasOwnProperty(key)) {
                 const entry = response.data[test][key];
+                let timeTaken = entry.timeElapsed - previousTimeElapsed;
                 table += `<tr>
                     <td>${key}</td>
                     <td>${entry.answerNumber}</td>
@@ -32,11 +36,20 @@ $.ajax({
                     <td>${entry.imageNumber}</td>
                     <td>${entry.imageWidth}</td>
                     <td>${entry.isSynthetic}</td>
-                    
                     <td>${entry.timeElapsed}</td>
-                      </tr>`;
+                    <td>${timeTaken}</td>
+                </tr>`;
+                previousTimeElapsed = entry.timeElapsed;
+                totalEntries++;
+                if (entry.answer !== entry.realAnswer) {
+                    incorrectEntries++;
+                }
                 }
             }
+            let errorRate = (incorrectEntries / totalEntries) * 100;
+            let averageTimeTaken = previousTimeElapsed / totalEntries;
+            table += `<tr><td colspan="11">Error Rate: ${errorRate.toFixed(2)}%</td></tr>`;
+            table += `<tr><td colspan="11">Average Time Taken: ${averageTimeTaken.toFixed(2)} seconds</td></tr>`;
             }
         }
           
