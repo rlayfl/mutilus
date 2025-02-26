@@ -11,9 +11,11 @@
                 <div class="row">
 
                     <!-- Time elapsed shown here -->
+                    {% if experimentName == "Jasmine" %}
                     <div class="col-12">
-                        Time elapsed: <span id="time-elapsed">0</span> milliseconds
+                        Time elapsed: <span id="time-elapsed" style="color: red;">0</span> milliseconds
                     </div>
+                    {% endif %}
 
                     <!-- Image of buoy shown here -->
                     <div class="col-12">
@@ -98,7 +100,7 @@
                     </div>
                 </div>
 
-                <!-- Buoys Picture Buttons -->
+                {% comment %} <!-- Buoys Picture Buttons -->
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
@@ -180,7 +182,7 @@
                             </div>
                         </div>
                     </div>                    
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </div>

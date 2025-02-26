@@ -11,6 +11,8 @@ from PIL import Image
 
 def experiment(request, experimentNumber):
 
+    experimentName = request.GET.get('experiment')
+
     # Define the path to the images directories
     real_images_path = os.path.join(settings.STATICFILES_DIRS[0], 'images', 'marker_buoys', 'real')
     synthetic_images_path = os.path.join(settings.STATICFILES_DIRS[0], 'images', 'marker_buoys', 'synthetic')
@@ -37,8 +39,6 @@ def experiment(request, experimentNumber):
         # Get the list of image files for real and synthetic images
         real_image_files = [f for f in os.listdir(os.path.join(real_images_path, buoy_type)) if os.path.isfile(os.path.join(real_images_path, buoy_type, f))]
         synthetic_image_files = [f for f in os.listdir(os.path.join(synthetic_images_path, buoy_type)) if os.path.isfile(os.path.join(synthetic_images_path, buoy_type, f))]
-
-        print(type_id)
 
         # Loop through the real image files and get their resolution
         for image_file in real_image_files:
@@ -92,12 +92,12 @@ def experiment(request, experimentNumber):
     template = loader.get_template('experiment.html')
     # Context with experimentNumber, buttons, and images_info
     context = {
-        'experimentNumber': experimentNumber,
+        'experimentName': experimentName,
         'buttons': buttons,
         'images_info': images_info
     }
 
-    print(images_info)
+    print(experimentNumber)
 
     # Render the template with context
     return HttpResponse(template.render(context, request))
